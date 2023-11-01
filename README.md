@@ -4,6 +4,16 @@
 
 - [ ] nextjs
 
+  - [ ] hydartion
+  - [ ] getStatic like functions
+  - [ ] SSG, CSR, ISR, SSR
+
+- [ ] typescript
+
+  - [ ] generic
+  - [ ] interface
+  - [ ] type feature (like, aliasing, assertion, etc...)
+
 - [ ] emotion
 
 - [ ] webpack
@@ -17,3 +27,7 @@
   - [ ] prettier
 
 - [ ] Jest
+
+- [x] DB(firebase firestore)
+
+- [ ] Deploy(vercell or firebase)
