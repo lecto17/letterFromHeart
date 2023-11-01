@@ -31,8 +31,13 @@ function TweetForm({ width }: { width: "default" | "full" }) {
     e.preventDefault();
 
     // formRef.current?.submit();
-    await fetch("/api/upload-tweet");
-    console.log("Handle Tweet");
+    await fetch("/api/upload-tweet/", {
+      method: "POST",
+      body: JSON.stringify({ message: "nice day" }),
+    }).then((res) => {
+      console.log("RESUT: ", res);
+      if (res.status === 200) alert("업로드 성공!");
+    });
   };
 
   return (
