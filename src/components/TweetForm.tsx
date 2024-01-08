@@ -43,8 +43,8 @@ function TweetForm({ width }: { width: "default" | "full" }) {
   return (
     <div className={TweetFormStyles({ width })}>
       <Avatar
-        src="https://pbs.twimg.com/profile_images/1489998205236527108/q2REh8nW_400x400.jpg"
-        alt="Roy Quilor"
+        src="/images/profile/lion.png"
+        alt="profile image"
         initials="RQ"
       />
       <form className="flex flex-col flex-1 gap-y-4" ref={formRef}>
