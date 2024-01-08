@@ -26,16 +26,20 @@ export default function Home() {
         <aside className="col-span-3 hidden xl:flex flex-col w-[350px]">
           <div className="sticky top-0">
             <Search />
-            <Panel title="What's happening" href="/">
+            <Panel title="오늘 이런 일들이...!?" href="/">
               <PanelItemTrends
-                title="Next JS"
-                category="Development"
+                title="점심 메뉴"
+                category="식사 > 점심메뉴"
                 stat="57.5K"
               />
-              <PanelItemTrends title="Figma" category="Design" stat="107.5K" />
               <PanelItemTrends
-                title="Webflow"
-                category="Design"
+                title="나 내일 퇴사해..!ㅎㅎ"
+                category="일상"
+                stat="107.5K"
+              />
+              <PanelItemTrends
+                title="말잇못 이야기😢"
+                category="일상"
                 stat="127.5K"
               />
               <PanelItemTrends
@@ -49,7 +53,8 @@ export default function Home() {
                 stat="27.5K"
               />
             </Panel>
-            <Panel title="Who to follow" href="/">
+            {/* 추후 아래 코드는 어떻게 할지 결정할 것 */}
+            {/* <Panel title="Who to follow" href="/">
               <PanelItem
                 src="https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8Mjd8NzkwMjQ2NTJ8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60"
                 name="Charles Deluvio"
@@ -68,7 +73,7 @@ export default function Home() {
                 username="robpotter"
                 initials="RB"
               />
-            </Panel>
+            </Panel> */}
             <Footer />
           </div>
         </aside>

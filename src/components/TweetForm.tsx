@@ -27,12 +27,17 @@ const TweetFormStyles = cva("flex flex-1 gap-x-2", {
 function TweetForm({ width }: { width: "default" | "full" }) {
   const [input, setInput] = useState<string>("");
   const formRef = useRef<HTMLFormElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const handleTweet = async (e) => {
     e.preventDefault();
 
     // formRef.current?.submit();
     await fetch("/api/upload-tweet");
-    console.log("Handle Tweet");
+    alert("업로드 완료 : )");
+    setInput("");
+
+    inputRef.current && inputRef.current.focus();
   };
 
   return (
@@ -48,8 +53,9 @@ function TweetForm({ width }: { width: "default" | "full" }) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             type="text"
-            placeholder="What's up?"
+            placeholder="오늘 어떤 일들이 있었나요?"
             className="w-full px-4 py-3 text-xl border-transparent placeholder:text-slate-600 outline-0 focus:outline-none appearance-none focus:ring-0 focus:border-transparent"
+            ref={inputRef}
           />
         </div>
         <div className="flex justify-between items-center">
