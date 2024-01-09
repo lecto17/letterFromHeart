@@ -33,7 +33,10 @@ function TweetForm({ width }: { width: "default" | "full" }) {
     e.preventDefault();
 
     // formRef.current?.submit();
-    await fetch("/api/upload-tweet");
+    await fetch("/api/upload-tweet", {
+      method: "POST",
+      body: JSON.stringify({ text: input }),
+    });
     alert("업로드 완료 : )");
     setInput("");
 
