@@ -17,6 +17,16 @@ interface PostItem {
   image?: ReactNode;
 }
 
+interface TweetItem {
+  userName: string;
+  password: string;
+  content: string;
+  description?: string;
+  date: string;
+  profileSrc?: string;
+  image?: ReactNode;
+}
+
 const items: PostItem[] = [
   {
     name: "Jane Doe",
