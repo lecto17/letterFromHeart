@@ -26,11 +26,21 @@ const TweetFormStyles = cva("flex flex-1 gap-x-2", {
 
 function TweetForm({ width }: { width: "default" | "full" }) {
   const [input, setInput] = useState<string>("");
+  const [pwd, setPwd] = useState<string>("");
+  const [pwdConfirm, setPwdConfirm] = useState<string>("");
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const pwdRef = useRef<HTMLInputElement>(null);
 
   const handleTweet = async (e) => {
     e.preventDefault();
+
+    if (pwd !== pwdConfirm || !pwd) {
+      alert("비밀번호를 확인해주세요 : (");
+      pwdRef.current?.focus();
+
+      return;
+    }
 
     // formRef.current?.submit();
     await fetch("/api/upload-tweet", {
@@ -41,6 +51,14 @@ function TweetForm({ width }: { width: "default" | "full" }) {
     setInput("");
 
     inputRef.current && inputRef.current.focus();
+  };
+
+  const handleChange = (value: string, type: string) => {
+    if (type === "pwd") {
+      setPwd(value);
+      return;
+    }
+    setPwdConfirm(value);
   };
 
   return (
@@ -84,7 +102,27 @@ function TweetForm({ width }: { width: "default" | "full" }) {
               <span className="sr-only">Tag location</span>
             </Link>
           </div>
-          <div>
+          <div className="flex items-center">
+            <div className="input-wrapper flex mr-3">
+              {/* 추후 공통 input 컴포넌트로 빼기 */}
+              <input
+                className="w-24 h-6 rounded-md border-slate-200 mr-3 text-xs focus:ring-0 focus:border-transparent focus:border-slate-500"
+                type="password"
+                name="password"
+                value={pwd}
+                onChange={(e) => handleChange(e.target.value, "pwd")}
+                placeholder="비밀번호 입력"
+                ref={pwdRef}
+              />
+              <input
+                className="w-24 h-6 rounded-md border-slate-200 text-xs focus:ring-0 focus:border-transparent focus:border-slate-500"
+                type="password"
+                name="passwordConfirm"
+                value={pwdConfirm}
+                onChange={(e) => handleChange(e.target.value, "confirm")}
+                placeholder="비밀번호 확인"
+              />
+            </div>
             <button
               onClick={(e) => handleTweet(e)}
               disabled={!input}
