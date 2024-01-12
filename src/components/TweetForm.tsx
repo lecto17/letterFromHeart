@@ -28,6 +28,7 @@ function TweetForm({ width }: { width: "default" | "full" }) {
   const [input, setInput] = useState<string>("");
   const [pwd, setPwd] = useState<string>("");
   const [pwdConfirm, setPwdConfirm] = useState<string>("");
+  const [profileImage, setProfileImage] = useState<string>("");
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const pwdRef = useRef<HTMLInputElement>(null);
@@ -64,9 +65,11 @@ function TweetForm({ width }: { width: "default" | "full" }) {
   return (
     <div className={TweetFormStyles({ width })}>
       <Avatar
-        src="/images/profile/lion.png"
+        src={profileImage || "/images/profile/lion.png"}
         alt="profile image"
         initials="RQ"
+        profileImage={profileImage}
+        setProfileImage={setProfileImage}
       />
       <form className="flex flex-col flex-1 gap-y-4" ref={formRef}>
         <div className="flex flex-1">

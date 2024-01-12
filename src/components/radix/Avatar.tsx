@@ -1,17 +1,20 @@
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import Image from "next/image";
-import { useCallback, useState } from "react";
+import { Dispatch, SetStateAction, useCallback, useState } from "react";
 
 const AvatarDemo = ({
   src,
   alt,
   initials,
+  profileImage,
+  setProfileImage,
 }: {
   src: string;
   alt: string;
   initials: string;
+  profileImage: string;
+  setProfileImage: Dispatch<SetStateAction<string>>;
 }) => {
-  const [profileImage, setProfileImage] = useState(src || "");
   const [showable, setShowable] = useState(false);
 
   const mockProfileImage = [
@@ -67,15 +70,14 @@ const AvatarDemo = ({
     },
   ];
 
-  const chooseProfileImages = useCallback(() => {
-    if (!showable) {
-    }
+  const showProfileImages = (isShow: boolean) => {
+    setShowable(isShow);
+  };
 
-    setShowable((prev) => !prev);
-  }, [showable]);
-
-  const touchOutside = () => {
+  const chooseProfileImages = (src: string) => {
     setShowable(false);
+    setProfileImage(src);
+    console.log("dd");
   };
 
   return (
@@ -84,19 +86,22 @@ const AvatarDemo = ({
         className="AvatarImage w-1000 h-100 object-cover cursor-pointer"
         src={profileImage || src}
         alt={alt}
-        onClick={chooseProfileImages}
+        onClick={() => showProfileImages(true)}
       />
       {showable && (
         <section
           className="background absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex justify-center items-center bg-red-300 z-50 bg-black opacity-70"
-          onClick={touchOutside}
+          onClick={() => showProfileImages(false)}
         >
           <main className="profile-list-wrapper w-[512px] h-32 bg-white rounded-md">
             <ul className="profile-list p-2 grid grid-rows-2 grid-cols-5 gap-4 justify-center items-center">
               {mockProfileImage.map((profile) => {
                 const { id, src, alt } = profile;
                 return (
-                  <li className="profile rounded-full overflow-hidden border-box w-10 h-10 cursor-pointer hover:border-2 hover:border-slate-200">
+                  <li
+                    className="profile rounded-full overflow-hidden border-box w-10 h-10 cursor-pointer hover:border-2 hover:border-slate-200"
+                    onClick={() => chooseProfileImages(src)}
+                  >
                     <Image
                       key={id}
                       width={100}
