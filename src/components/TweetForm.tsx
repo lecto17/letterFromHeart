@@ -11,6 +11,9 @@ import {
 
 import { cva } from "class-variance-authority";
 import { useState, useRef } from "react";
+import { UploadTweetItem } from "src/types/tweet";
+import dayjs from "dayjs";
+import { getProfileAnimal } from "src/utils/utils";
 
 const TweetFormStyles = cva("flex flex-1 gap-x-2", {
   variants: {
@@ -28,7 +31,9 @@ function TweetForm({ width }: { width: "default" | "full" }) {
   const [input, setInput] = useState<string>("");
   const [pwd, setPwd] = useState<string>("");
   const [pwdConfirm, setPwdConfirm] = useState<string>("");
-  const [profileImage, setProfileImage] = useState<string>("");
+  const [profileImage, setProfileImage] = useState<string>(
+    "/images/profile/lion.png"
+  );
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const pwdRef = useRef<HTMLInputElement>(null);
@@ -39,11 +44,18 @@ function TweetForm({ width }: { width: "default" | "full" }) {
     if (pwd !== pwdConfirm || !pwd) {
       alert("비밀번호를 확인해주세요 : (");
       pwdRef.current?.focus();
-
       return;
     }
 
-    // formRef.current?.submit();
+    const tweet: UploadTweetItem = {
+      userName: `${dayjs().format("HH")}시의 ${getProfileAnimal(profileImage)}`,
+      password: pwd,
+      content: input,
+      date: dayjs().format("YYYYMMDD"),
+    };
+
+    console.log("tweet: ", tweet);
+
     await fetch("/api/upload-tweet", {
       method: "POST",
       body: JSON.stringify({ text: input }),
@@ -65,7 +77,7 @@ function TweetForm({ width }: { width: "default" | "full" }) {
   return (
     <div className={TweetFormStyles({ width })}>
       <Avatar
-        src={profileImage || "/images/profile/lion.png"}
+        src={profileImage}
         alt="profile image"
         initials="RQ"
         profileImage={profileImage}
