@@ -24,7 +24,7 @@ interface TweetItem {
   description?: string;
   date: string;
   profileSrc?: string;
-  image?: ReactNode;
+  image?: string;
 }
 
 const items: PostItem[] = [
