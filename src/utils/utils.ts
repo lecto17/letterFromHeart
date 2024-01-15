@@ -36,3 +36,9 @@ export async function getFeeds() {
   //   console.log("No such document!");
   // }
 }
+
+export const getProfileAnimal = (imageSrc: string) => {
+  const splited = imageSrc.split("/");
+
+  return splited[splited.length - 1].split(".")[0];
+};
