@@ -37,6 +37,7 @@ function TweetForm({ width }: { width: "default" | "full" }) {
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const pwdRef = useRef<HTMLInputElement>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
 
   const handleTweet = async (e) => {
     e.preventDefault();
@@ -74,6 +75,28 @@ function TweetForm({ width }: { width: "default" | "full" }) {
     setPwdConfirm(value);
   };
 
+  const clickSubMenu = (type: string) => {
+    console.log("type: ", type);
+
+    switch (type) {
+      case "image":
+      case "image":
+        fileRef.current?.click();
+        console.log("asdf: ", fileRef);
+
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  const uploadFile = (target) => {
+    console.log("value: ", target.value);
+
+    console.log(fileRef.current);
+  };
+
   return (
     <div className={TweetFormStyles({ width })}>
       <Avatar
@@ -96,10 +119,17 @@ function TweetForm({ width }: { width: "default" | "full" }) {
         </div>
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-x-4 px-4">
-            <Link href="/">
+            <li onClick={() => clickSubMenu("image")}>
               <RiImage2Line className="w-5 h-5" />
               <span className="sr-only">Image</span>
-            </Link>
+              <input
+                type="file"
+                className="hidden"
+                ref={fileRef}
+                onChange={(e) => uploadFile(e.target)}
+                accept=".png"
+              />
+            </li>
             <Link href="/">
               <RiFileGifLine className="w-5 h-5" />
               <span className="sr-only">Gif</span>
