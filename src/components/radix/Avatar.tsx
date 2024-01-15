@@ -99,10 +99,11 @@ const AvatarDemo = ({
                 const { id, src, alt } = profile;
                 return (
                   <li
-                    className="profile rounded-full overflow-hidden border-box w-10 h-10 cursor-pointer hover:border-2 hover:border-slate-200"
+                    className="profile rounded-full overflow-hidden border-box w-10 h-10 cursor-pointer"
                     onClick={() => chooseProfileImages(src)}
                   >
                     <Image
+                      className="hover:scale-110 transition-all"
                       key={id}
                       width={100}
                       height={100}
