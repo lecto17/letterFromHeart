@@ -12,8 +12,8 @@ const AvatarDemo = ({
   src: string;
   alt: string;
   initials: string;
-  profileImage: string;
-  setProfileImage: Dispatch<SetStateAction<string>>;
+  profileImage?: string;
+  setProfileImage?: Dispatch<SetStateAction<string>>;
 }) => {
   const [showable, setShowable] = useState(false);
 
@@ -76,7 +76,9 @@ const AvatarDemo = ({
 
   const chooseProfileImages = (src: string) => {
     setShowable(false);
-    setProfileImage(src);
+
+    setProfileImage && setProfileImage(src);
+
     console.log("dd");
   };
 
@@ -100,7 +102,11 @@ const AvatarDemo = ({
                 return (
                   <li
                     className="profile rounded-full overflow-hidden border-box w-10 h-10 cursor-pointer"
-                    onClick={() => chooseProfileImages(src)}
+                    onClick={() =>
+                      chooseProfileImages(
+                        src || "/public/images/profile/lion.png"
+                      )
+                    }
                   >
                     <Image
                       className="hover:scale-110 transition-all"

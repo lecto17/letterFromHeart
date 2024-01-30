@@ -39,7 +39,7 @@ function TweetForm({ width }: { width: "default" | "full" }) {
   const pwdRef = useRef<HTMLInputElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const handleTweet = async (e) => {
+  const handleTweet = async (e: any) => {
     e.preventDefault();
 
     if (pwd !== pwdConfirm || !pwd) {
@@ -91,9 +91,7 @@ function TweetForm({ width }: { width: "default" | "full" }) {
     }
   };
 
-  const uploadFile = (target) => {
-    console.log("value: ", target.value);
-
+  const uploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(fileRef.current);
   };
 
@@ -126,7 +124,7 @@ function TweetForm({ width }: { width: "default" | "full" }) {
                 type="file"
                 className="hidden"
                 ref={fileRef}
-                onChange={(e) => uploadFile(e.target)}
+                onChange={(e) => uploadFile(e)}
                 accept=".png"
               />
             </li>
